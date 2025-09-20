@@ -3,15 +3,14 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Etik Komite — Rēsh-1 Secure</title>
+  <title>Etik Komite — Giriş</title>
   <style>
     :root{
-      --bg:#08020a;
-      --panel:#140024;
-      --accent:#a64dff;
-      --accent-2:#b366ff;
-      --muted:#cdbfff;
-      --danger:#ff4d4d;
+      --bg:#0b2a1f; /* dark green */
+      --panel:#14432a;
+      --accent:#66ff99;
+      --accent-2:#33ff88;
+      --muted:#cdebd1;
       --glass: rgba(255,255,255,0.03);
       --radius:14px;
       font-family: "Inter", "Segoe UI", Roboto, "Courier New", monospace;
@@ -23,7 +22,7 @@
       display:flex;
       align-items:center;
       justify-content:center;
-      background: radial-gradient(ellipse at top left, rgba(166,77,255,0.08), transparent 20%), var(--bg);
+      background: radial-gradient(ellipse at top left, rgba(102,255,153,0.08), transparent 20%), var(--bg);
       color:var(--muted);
       padding:24px;
     }
@@ -34,8 +33,8 @@
       border-radius:var(--radius);
       padding:32px;
       background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      border:1px solid rgba(166,77,255,0.15);
-      box-shadow: 0 8px 40px rgba(40,0,60,0.6);
+      border:1px solid rgba(102,255,153,0.15);
+      box-shadow: 0 8px 40px rgba(0,40,20,0.6);
       display:flex;
       flex-direction:column;
       align-items:center;
@@ -44,7 +43,7 @@
 
     .logo{font-size:48px; color:var(--accent)}
     h1{margin:0; font-size:20px; color:var(--accent-2); text-align:center}
-    .classified{font-size:12px; color:#ff9ad1; text-align:center}
+    .classified{font-size:12px; color:#aaffc8; text-align:center}
 
     .terminal{
       width:100%;
@@ -54,13 +53,13 @@
       font-family:monospace;
       font-size:13px;
       color:var(--muted);
-      border:1px solid rgba(166,77,255,0.06);
+      border:1px solid rgba(102,255,153,0.06);
     }
 
     label{display:block; font-size:12px; color:var(--muted); margin-top:12px}
     input[type="password"]{
       width:100%; padding:12px; margin-top:6px;
-      border-radius:10px; border:1px solid rgba(166,77,255,0.08);
+      border-radius:10px; border:1px solid rgba(102,255,153,0.08);
       background:var(--glass); color:var(--muted);
     }
     button.primary{
@@ -77,33 +76,33 @@
 <body>
   <div class="login-frame">
     <div class="logo">🛡️</div>
-    <h1>Etik Komite — Rēsh-1</h1>
+    <h1>Etik Komite Oryantasyonu</h1>
     <div class="classified">🔒 GİZLİ / YALNIZCA YETKİLİ PERSONEL</div>
 
     <div class="terminal">
       &gt; FOUNDATION SECURE NETWORK<br>
-      Accessing Rēsh-1 ("Seat of Consciousness") — Etik Komite modülü.<br>
+      Etik Komite giriş modülü.<br>
       <strong>Kimlik doğrulama gereklidir.</strong>
     </div>
 
     <div style="width:100%">
       <label for="accessCode">SECURITY CLEARANCE CODE</label>
-      <input id="accessCode" type="password" placeholder="Enter access code" aria-label="security code" />
-      <button class="primary" id="authBtn">AUTHENTICATE</button>
+      <input id="accessCode" type="password" placeholder="Kod girin" aria-label="security code" />
+      <button class="primary" id="authBtn">GİRİŞ</button>
     </div>
 
-    <div class="muted-note small">[LEVEL 4 CLEARANCE REQUIRED]<br>Yetkisiz erişim disiplin cezaları ile sonuçlanacaktır.</div>
+    <div class="muted-note small">[LEVEL 4 CLEARANCE REQUIRED]<br>Yetkisiz erişim disiplin ile sonuçlanır.</div>
   </div>
 
   <script>
-    const AUTH_CODE = 'resh4-etik-ACCESS'; // örnek kod
+    const AUTH_CODE = 'etik-oryantasyon'; // örnek kod
     const authBtn = document.getElementById('authBtn');
     const accessCodeInput = document.getElementById('accessCode');
 
     authBtn.addEventListener('click', ()=>{
       const val = accessCodeInput.value.trim();
       if(val===AUTH_CODE){
-        alert('Erişim onaylandı — welcome.');
+        alert('Erişim onaylandı — hoşgeldiniz.');
       } else {
         alert('Erişim reddedildi. Hatalı kod.');
       }
