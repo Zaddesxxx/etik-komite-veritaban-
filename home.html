@@ -36,10 +36,7 @@
       align-items:center;
       margin-bottom:40px;
     }
-    header h1{
-      color: var(--accent-2);
-      font-size:1.8em;
-    }
+    header h1{ color: var(--accent-2); font-size:1.8em; }
     header a{
       color: var(--accent);
       text-decoration:none;
@@ -49,9 +46,7 @@
       background: rgba(0,70,0,0.4);
       transition:0.3s;
     }
-    header a:hover{
-      background: rgba(0,70,0,0.6);
-    }
+    header a:hover{ background: rgba(0,70,0,0.6); }
     .announcements{
       width:100%;
       max-width:900px;
@@ -72,24 +67,19 @@
       transform: translateY(-3px);
       box-shadow: 0 10px 25px rgba(0,40,20,0.7);
     }
-    .announcement h3{
-      margin:0 0 10px 0;
-      color: var(--accent-2);
-    }
-    .announcement p{
-      margin:0;
-      color: var(--muted);
-      line-height:1.5;
-    }
-    footer{
-      margin-top:50px;
-      color:#aaa;
-      font-size:0.9em;
-      text-align:center;
-    }
+    .announcement h3{ margin:0 0 10px 0; color: var(--accent-2); }
+    .announcement p{ margin:0; color: var(--muted); line-height:1.5; }
+    footer{ margin-top:50px; color:#aaa; font-size:0.9em; text-align:center; }
   </style>
 </head>
 <body>
+  <script>
+    // session parametre kontrolü
+    const urlParams = new URLSearchParams(window.location.search);
+    const session = urlParams.get('session');
+    if(!session){ window.location.href = 'index.html'; }
+  </script>
+
   <header>
     <h1>Etik Komite Ana Sayfa</h1>
     <a href="index.html">Çıkış</a>
@@ -100,20 +90,16 @@
       <h3>[Başkan] 21/09/2025</h3>
       <p>Komite üyeleri, bugünkü toplantı saat 15:00’te başkanlık salonunda yapılacaktır. Katılım zorunludur.</p>
     </div>
-
     <div class="announcement">
       <h3>[Başkan] 20/09/2025</h3>
       <p>Yeni güvenlik prosedürleri uygulanmaya başlamıştır. Tüm üyelerin dokümanı incelemesi gerekmektedir.</p>
     </div>
-
     <div class="announcement">
       <h3>[Başkan] 18/09/2025</h3>
       <p>Geçen hafta alınan şikayetlerin raporu hazırlanmıştır. Lütfen ilgili departmanlarla iletişime geçiniz.</p>
     </div>
   </div>
 
-  <footer>
-    &copy; 2025 Etik Komite. Tüm hakları saklıdır.
-  </footer>
+  <footer>&copy; 2025 Etik Komite. Tüm hakları saklıdır.</footer>
 </body>
 </html>
