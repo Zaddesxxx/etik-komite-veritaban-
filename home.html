@@ -4,32 +4,116 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Etik Komite — Ana Sayfa</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    body {
+    :root{
+      --bg:#042218;
+      --panel:#0a3525;
+      --accent:#66ff99;
+      --accent-2:#33ff88;
+      --muted:#cdebd1;
+      --glass: rgba(255,255,255,0.03);
+      --radius:14px;
+      font-family: "Inter", sans-serif;
+    }
+    *{box-sizing:border-box}
+    body{
       margin:0;
-      font-family: 'Inter', sans-serif;
-      background: #042218;
-      color: #cdebd1;
+      min-height:100vh;
+      background: radial-gradient(ellipse at top left, rgba(102,255,153,0.05), transparent 20%), var(--bg);
+      color:var(--muted);
+      font-family: var(--font-family);
       display:flex;
-      justify-content:center;
-      align-items:center;
-      height:100vh;
       flex-direction:column;
-      text-align:center;
+      align-items:center;
+      padding:24px;
     }
-    a {
-      color:#66ff99;
+    header{
+      width:100%;
+      max-width:900px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:40px;
+    }
+    header h1{
+      color: var(--accent-2);
+      font-size:1.8em;
+    }
+    header a{
+      color: var(--accent);
       text-decoration:none;
-      margin-top:20px;
+      font-weight:600;
+      padding:8px 12px;
+      border-radius:10px;
+      background: rgba(0,70,0,0.4);
+      transition:0.3s;
     }
-    a:hover {
-      text-decoration:underline;
+    header a:hover{
+      background: rgba(0,70,0,0.6);
+    }
+    .announcements{
+      width:100%;
+      max-width:900px;
+      display:flex;
+      flex-direction:column;
+      gap:20px;
+    }
+    .announcement{
+      background: var(--glass);
+      backdrop-filter: blur(10px);
+      padding:20px;
+      border-radius:var(--radius);
+      border:1px solid rgba(102,255,153,0.1);
+      box-shadow: 0 6px 20px rgba(0,40,20,0.6);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .announcement:hover{
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(0,40,20,0.7);
+    }
+    .announcement h3{
+      margin:0 0 10px 0;
+      color: var(--accent-2);
+    }
+    .announcement p{
+      margin:0;
+      color: var(--muted);
+      line-height:1.5;
+    }
+    footer{
+      margin-top:50px;
+      color:#aaa;
+      font-size:0.9em;
+      text-align:center;
     }
   </style>
 </head>
 <body>
-  <h1>Hoşgeldiniz, Etik Komite Üyesi</h1>
-  <p>Bu sayfa giriş sonrası görüntülenecek ana sayfadır.</p>
-  <a href="index.html">Çıkış Yap</a>
+  <header>
+    <h1>Etik Komite Ana Sayfa</h1>
+    <a href="index.html">Çıkış</a>
+  </header>
+
+  <div class="announcements">
+    <div class="announcement">
+      <h3>[Başkan] 21/09/2025</h3>
+      <p>Komite üyeleri, bugünkü toplantı saat 15:00’te başkanlık salonunda yapılacaktır. Katılım zorunludur.</p>
+    </div>
+
+    <div class="announcement">
+      <h3>[Başkan] 20/09/2025</h3>
+      <p>Yeni güvenlik prosedürleri uygulanmaya başlamıştır. Tüm üyelerin dokümanı incelemesi gerekmektedir.</p>
+    </div>
+
+    <div class="announcement">
+      <h3>[Başkan] 18/09/2025</h3>
+      <p>Geçen hafta alınan şikayetlerin raporu hazırlanmıştır. Lütfen ilgili departmanlarla iletişime geçiniz.</p>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 Etik Komite. Tüm hakları saklıdır.
+  </footer>
 </body>
 </html>
