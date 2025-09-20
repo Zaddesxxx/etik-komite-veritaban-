@@ -1,38 +1,120 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Etik Komite Girişi</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <title>Resh-1 Secure Access</title>
+  <style>
+    body {
+      background-color: #0a0016;
+      color: #d1c4ff;
+      font-family: "Courier New", monospace;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      border: 2px solid #6a0dad;
+      border-radius: 12px;
+      padding: 30px;
+      width: 380px;
+      background-color: #140024;
+      box-shadow: 0 0 15px #6a0dad;
+      text-align: center;
+    }
+    .icon {
+      font-size: 40px;
+      color: #a64dff;
+      margin-bottom: 15px;
+    }
+    h1 {
+      font-size: 22px;
+      color: #b366ff;
+      margin: 10px 0;
+    }
+    .classified {
+      color: #ff4081;
+      font-weight: bold;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+    .terminal {
+      background-color: #0a0016;
+      border: 1px solid #6a0dad;
+      padding: 15px;
+      margin-bottom: 20px;
+      text-align: left;
+      font-size: 13px;
+      color: #d1c4ff;
+      border-radius: 6px;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      background-color: #1a002e;
+      border: 1px solid #6a0dad;
+      border-radius: 6px;
+      color: #fff;
+      font-size: 14px;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #a64dff;
+      color: white;
+      font-weight: bold;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover {
+      background-color: #b366ff;
+    }
+    .warning {
+      font-size: 12px;
+      color: #ff4d4d;
+      margin-top: 20px;
+    }
+  </style>
 </head>
 <body>
-  <div class="login-container">
-    <div class="login-box">
-      <h2>Etik Komite Girişi</h2>
-      <input type="password" id="password" placeholder="Şifreyi girin">
-      <button onclick="checkPassword()">Giriş</button>
-      <p id="error" class="error"></p>
+  <div class="container">
+    <div class="icon">🛡️</div>
+    <h1>Soap's Rēsh-1</h1>
+    <div class="classified">🔒 CLASSIFIED INFORMATION</div>
+
+    <div class="terminal">
+      &gt; FOUNDATION SECURE NETWORK <br>
+      Accessing Rēsh-1 ("Seat of Consciousness") declassified... <br>
+      Authentication required. Insert credentials.
+    </div>
+
+    <div>
+      <label for="code">SECURITY CLEARANCE CODE</label>
+      <input type="password" id="code" placeholder="Enter access code">
+      <button onclick="authenticate()">AUTHENTICATE</button>
+    </div>
+
+    <div class="warning">
+      [LEVEL 4 CLEARANCE REQUIRED]<br>
+      UNAUTHORIZED ACCESS IS A VIOLATION OF FOUNDATION PROTOCOL<br>
+      VIOLATORS WILL BE SUBJECT TO IMMEDIATE TERMINATION
     </div>
   </div>
 
   <script>
-    const passwords = ["test","test2"];
-
-    function checkPassword() {
-      const pw = document.getElementById('password').value.trim();
-      const error = document.getElementById('error');
-      if (passwords.includes(pw)) {
-        window.location.href = "home.html";
+    function authenticate() {
+      const code = document.getElementById("code").value;
+      if (code === "resh-1-access") {
+        alert("✅ Access Granted. Welcome, Level 4 Clearance.");
       } else {
-        error.textContent = "Hatalı şifre. Tekrar deneyin.";
+        alert("❌ Access Denied. Unauthorized credentials.");
       }
     }
-
-    document.getElementById('password').addEventListener("keypress", function(e){
-      if(e.key === "Enter") checkPassword();
-    });
   </script>
 </body>
 </html>
