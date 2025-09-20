@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Etik Komite — Ana Sayfa</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Etik Komite — Rēsh-1 Database</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
     :root{
@@ -14,92 +14,106 @@
       --muted:#cdebd1;
       --glass: rgba(255,255,255,0.03);
       --radius:14px;
-      font-family: "Inter", sans-serif;
+      font-family: "Inter", "Segoe UI", Roboto, "Courier New", monospace;
     }
     *{box-sizing:border-box}
     body{
       margin:0;
       min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
       background: radial-gradient(ellipse at top left, rgba(102,255,153,0.05), transparent 20%), var(--bg);
       color:var(--muted);
-      font-family: var(--font-family);
-      display:flex;
-      flex-direction:column;
-      align-items:center;
       padding:24px;
     }
-    header{
-      width:100%;
-      max-width:900px;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      margin-bottom:40px;
-    }
-    header h1{ color: var(--accent-2); font-size:1.8em; }
-    header a{
-      color: var(--accent);
-      text-decoration:none;
-      font-weight:600;
-      padding:8px 12px;
-      border-radius:10px;
-      background: rgba(0,70,0,0.4);
-      transition:0.3s;
-    }
-    header a:hover{ background: rgba(0,70,0,0.6); }
-    .announcements{
-      width:100%;
-      max-width:900px;
+    .frame{
+      width:900px;
+      max-width:100%;
+      border-radius:var(--radius);
+      padding:24px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));
+      border:1px solid rgba(102,255,153,0.15);
+      box-shadow: 0 8px 40px rgba(0,40,20,0.6);
       display:flex;
       flex-direction:column;
       gap:20px;
     }
-    .announcement{
-      background: var(--glass);
-      backdrop-filter: blur(10px);
-      padding:20px;
+    .header{display:flex; justify-content:space-between; align-items:center;}
+    .header h1{margin:0; color:var(--accent-2)}
+    .session-note{font-size:12px; color:#bfa8ff;}
+    .announcements{
       border-radius:var(--radius);
-      border:1px solid rgba(102,255,153,0.1);
-      box-shadow: 0 6px 20px rgba(0,40,20,0.6);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      padding:16px;
+      background:var(--panel);
+      border:1px solid rgba(102,255,153,0.06);
+      display:flex;
+      flex-direction:column;
+      gap:12px;
     }
-    .announcement:hover{
-      transform: translateY(-3px);
-      box-shadow: 0 10px 25px rgba(0,40,20,0.7);
+    .announcement{
+      padding:12px;
+      border-left:4px solid var(--accent);
+      background: rgba(102,255,153,0.02);
+      border-radius:8px;
+      font-size:14px;
     }
-    .announcement h3{ margin:0 0 10px 0; color: var(--accent-2); }
-    .announcement p{ margin:0; color: var(--muted); line-height:1.5; }
-    footer{ margin-top:50px; color:#aaa; font-size:0.9em; text-align:center; }
+    .announcement strong{color:var(--accent-2);}
+    .logout-btn{
+      align-self:flex-end;
+      padding:8px 16px;
+      border-radius:10px;
+      border:none;
+      background:linear-gradient(90deg,var(--accent),var(--accent-2));
+      color:#fff;
+      font-weight:600;
+      cursor:pointer;
+    }
   </style>
 </head>
 <body>
-  <script>
-    // session parametre kontrolü
-    const urlParams = new URLSearchParams(window.location.search);
-    const session = urlParams.get('session');
-    if(!session){ window.location.href = 'index.html'; }
-  </script>
-
-  <header>
-    <h1>Etik Komite Ana Sayfa</h1>
-    <a href="index.html">Çıkış</a>
-  </header>
-
-  <div class="announcements">
-    <div class="announcement">
-      <h3>[Başkan] 21/09/2025</h3>
-      <p>Komite üyeleri, bugünkü toplantı saat 15:00’te başkanlık salonunda yapılacaktır. Katılım zorunludur.</p>
+  <div class="frame">
+    <div class="header">
+      <h1>Etik Komite — Rēsh-1</h1>
+      <button class="logout-btn" id="logoutBtn">ÇIKIŞ</button>
     </div>
-    <div class="announcement">
-      <h3>[Başkan] 20/09/2025</h3>
-      <p>Yeni güvenlik prosedürleri uygulanmaya başlamıştır. Tüm üyelerin dokümanı incelemesi gerekmektedir.</p>
-    </div>
-    <div class="announcement">
-      <h3>[Başkan] 18/09/2025</h3>
-      <p>Geçen hafta alınan şikayetlerin raporu hazırlanmıştır. Lütfen ilgili departmanlarla iletişime geçiniz.</p>
+    <div class="session-note" id="sessionNote"></div>
+    <div class="announcements" id="announcements">
+      <!-- Anonslar buraya JS ile eklenecek -->
     </div>
   </div>
 
-  <footer>&copy; 2025 Etik Komite. Tüm hakları saklıdır.</footer>
+  <script>
+    // Session kontrolü
+    const params = new URLSearchParams(window.location.search);
+    const session = params.get('session');
+    const sessionNote = document.getElementById('sessionNote');
+    if(!session){
+      alert('Geçersiz veya süresi dolmuş session! Giriş sayfasına yönlendiriliyorsunuz.');
+      window.location.href = 'index.html';
+    } else {
+      sessionNote.textContent = `Session ID: ${session}`;
+    }
+
+    // Anonslar
+    const announcementsData = [
+      {author:"Komite Başkanı", text:"Raporlar tamamlandı. Tüm üyeler kontrol edin."},
+      {author:"Komite Başkanı", text:"Yeni Etik Protokol 3.2 etkinleştirildi."},
+      {author:"Komite Başkanı", text:"Yalnızca Level 4 kullanıcılar Rēsh-1 veritabanına erişebilir."}
+    ];
+
+    const announcementsContainer = document.getElementById('announcements');
+    announcementsData.forEach(a=>{
+      const div = document.createElement('div');
+      div.className = 'announcement';
+      div.innerHTML = `<strong>${a.author}:</strong> ${a.text}`;
+      announcementsContainer.appendChild(div);
+    });
+
+    // Logout
+    document.getElementById('logoutBtn').addEventListener('click', ()=>{
+      window.location.href = 'index.html';
+    });
+  </script>
 </body>
 </html>
