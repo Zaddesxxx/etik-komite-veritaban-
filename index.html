@@ -13,7 +13,7 @@
       --muted:#cdbfff;
       --danger:#ff4d4d;
       --glass: rgba(255,255,255,0.03);
-      --radius:10px;
+      --radius:14px;
       font-family: "Inter", "Segoe UI", Roboto, "Courier New", monospace;
     }
     *{box-sizing:border-box}
@@ -28,327 +28,86 @@
       padding:24px;
     }
 
-    .frame{
-      width:930px;
+    .login-frame{
+      width:400px;
       max-width:100%;
-      border-radius:14px;
-      padding:26px;
+      border-radius:var(--radius);
+      padding:32px;
       background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
       border:1px solid rgba(166,77,255,0.15);
       box-shadow: 0 8px 40px rgba(40,0,60,0.6);
-      display:grid;
-      grid-template-columns: 360px 1fr;
-      gap:20px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:24px;
     }
 
-    .left{
-      padding:18px;
+    .logo{font-size:48px; color:var(--accent)}
+    h1{margin:0; font-size:20px; color:var(--accent-2); text-align:center}
+    .classified{font-size:12px; color:#ff9ad1; text-align:center}
+
+    .terminal{
+      width:100%;
+      background:var(--panel);
       border-radius:10px;
-      background: linear-gradient(180deg, rgba(166,77,255,0.02), transparent);
+      padding:12px;
+      font-family:monospace;
+      font-size:13px;
+      color:var(--muted);
       border:1px solid rgba(166,77,255,0.06);
-      display:flex;
-      flex-direction:column;
-      gap:12px;
     }
 
-    .logo{font-size:36px; color:var(--accent); text-align:center}
-    h1{margin:4px 0 0 0; font-size:18px; color:var(--accent-2); text-align:center}
-    .classified{font-size:12px; text-align:center; color:#ff9ad1}
-
-    .terminal{background:var(--panel); border-radius:8px; padding:10px; font-family:monospace; font-size:13px; color:var(--muted); border:1px solid rgba(166,77,255,0.06)}
-
-    label{display:block; font-size:12px; color:var(--muted); margin-top:6px}
-    input[type="password"], input[type="text"], select{width:100%; padding:10px; margin-top:6px; border-radius:8px; border:1px solid rgba(166,77,255,0.08); background:var(--glass); color:var(--muted)}
-    button.primary{width:100%; padding:10px; border-radius:8px; border:none; background:linear-gradient(90deg,var(--accent),var(--accent-2)); color:#fff; font-weight:600; cursor:pointer}
-    button.ghost{background:transparent; border:1px solid rgba(166,77,255,0.12); color:var(--muted); padding:8px; border-radius:8px; cursor:pointer}
-
-    .right{
-      padding:18px;
-      border-radius:10px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.01), transparent);
-      border:1px solid rgba(166,77,255,0.04);
-      display:flex;
-      flex-direction:column;
-      gap:12px;
+    label{display:block; font-size:12px; color:var(--muted); margin-top:12px}
+    input[type="password"]{
+      width:100%; padding:12px; margin-top:6px;
+      border-radius:10px; border:1px solid rgba(166,77,255,0.08);
+      background:var(--glass); color:var(--muted);
+    }
+    button.primary{
+      width:100%; padding:12px; margin-top:16px;
+      border-radius:10px; border:none;
+      background:linear-gradient(90deg,var(--accent),var(--accent-2));
+      color:#fff; font-weight:600; cursor:pointer;
     }
 
-    .toolbar{display:flex; gap:8px; align-items:center}
-    .search{flex:1}
-    .table-wrap{overflow:auto; border-radius:8px; border:1px solid rgba(166,77,255,0.04); background:rgba(0,0,0,0.25); padding:8px}
-    table{width:100%; border-collapse:collapse; font-size:13px}
-    th, td{padding:10px; text-align:left; border-bottom:1px dashed rgba(166,77,255,0.03)}
-    th{font-size:12px; color:#e6dbff; font-weight:600}
+    .muted-note{font-size:12px; color:#bfa8ff; text-align:center}
 
-    .muted-note{font-size:12px; color:#bfa8ff}
-    .danger{color:var(--danger); font-weight:600}
-
-    /* modal */
-    .modal-backdrop{position:fixed; inset:0; display:none; align-items:center; justify-content:center; background:rgba(0,0,0,0.6)}
-    .modal{width:560px; max-width:95%; background:var(--panel); padding:18px; border-radius:12px; border:1px solid rgba(166,77,255,0.08)}
-    .modal.show{display:block}
-    .row{display:flex; gap:8px}
-    .row > *{flex:1}
-    .small{font-size:12px}
-
-    footer{font-size:11px; text-align:center; color:#8f79b8}
-
-    @media(max-width:800px){
-      .frame{grid-template-columns:1fr;}
-    }
   </style>
 </head>
 <body>
-  <div class="frame" role="application">
-    <div class="left">
-      <div class="logo">🛡️</div>
-      <h1>Etik Komite — Rēsh-1</h1>
-      <div class="classified">🔒 GİZLİ / YALNIZCA YETKİLİ PERSONEL</div>
+  <div class="login-frame">
+    <div class="logo">🛡️</div>
+    <h1>Etik Komite — Rēsh-1</h1>
+    <div class="classified">🔒 GİZLİ / YALNIZCA YETKİLİ PERSONEL</div>
 
-      <div class="terminal">
-        &gt; FOUNDATION SECURE NETWORK<br>
-        Accessing Rēsh-1 ("Seat of Consciousness") — Etik Komite modülü.<br>
-        <strong>Kimlik doğrulama gereklidir.</strong>
-      </div>
-
-      <div>
-        <label for="accessCode">SECURITY CLEARANCE CODE</label>
-        <input id="accessCode" type="password" placeholder="Enter access code" aria-label="security code" />
-        <button class="primary" id="authBtn">AUTHENTICATE</button>
-      </div>
-
-      <div class="muted-note small">[LEVEL 4 CLEARANCE REQUIRED]<br>Yetkisiz erişim disiplin cezaları ile sonuçlanacaktır.</div>
-
-      <div style="display:flex; gap:8px; margin-top:6px">
-        <button class="ghost" id="exportBtn">Veritabanını dışa aktar</button>
-        <button class="ghost" id="importBtn">İçe aktar</button>
-      </div>
-
+    <div class="terminal">
+      &gt; FOUNDATION SECURE NETWORK<br>
+      Accessing Rēsh-1 ("Seat of Consciousness") — Etik Komite modülü.<br>
+      <strong>Kimlik doğrulama gereklidir.</strong>
     </div>
 
-    <div class="right" id="panelRight" aria-live="polite">
-      <div style="display:flex; justify-content:space-between; align-items:center">
-        <div>
-          <div class="muted-note">Etik Komite Kayıtları</div>
-          <div style="font-size:18px; font-weight:700; color:var(--accent-2)">Veritabanı</div>
-        </div>
-        <div class="toolbar">
-          <input id="search" class="search" type="text" placeholder="Ara: vaka kimliği, konu, üye..." disabled />
-          <button id="addBtn" class="primary" disabled>YENİ KAYIT</button>
-        </div>
-      </div>
-
-      <div class="table-wrap" id="tableWrap">
-        <table aria-label="etik-komite-table">
-          <thead>
-            <tr><th>ID</th><th>Konu</th><th>Durum</th><th>Oluşturan</th><th>Tarih</th><th style="width:130px">İşlemler</th></tr>
-          </thead>
-          <tbody id="recordsTbody">
-            <tr><td colspan="6" class="small">Kimlik doğrulaması yapılmadı. Lütfen yetkili kodu girin.</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <footer>Etik Komite veritabanı — Lokal demo (veriler tarayıcıda saklanır).</footer>
+    <div style="width:100%">
+      <label for="accessCode">SECURITY CLEARANCE CODE</label>
+      <input id="accessCode" type="password" placeholder="Enter access code" aria-label="security code" />
+      <button class="primary" id="authBtn">AUTHENTICATE</button>
     </div>
+
+    <div class="muted-note small">[LEVEL 4 CLEARANCE REQUIRED]<br>Yetkisiz erişim disiplin cezaları ile sonuçlanacaktır.</div>
   </div>
-
-  <!-- modal -->
-  <div class="modal-backdrop" id="modalBackdrop">
-    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-      <h3 id="modalTitle">Yeni Kayıt</h3>
-      <div style="display:flex; flex-direction:column; gap:8px; margin-top:8px">
-        <label>Konu<input id="m_subject" type="text" /></label>
-        <label>Detaylar<textarea id="m_details" rows="4" style="width:100%; padding:8px; border-radius:8px; background:var(--glass); border:1px solid rgba(166,77,255,0.06); color:var(--muted)"></textarea></label>
-        <div class="row">
-          <label>Oluşturan<input id="m_author" type="text" /></label>
-          <label>Durum
-            <select id="m_status">
-              <option>İnceleniyor</option>
-              <option>Onaylandı</option>
-              <option>Reddedildi</option>
-              <option>Kapatıldı</option>
-            </select>
-          </label>
-        </div>
-        <div style="display:flex; gap:8px; justify-content:flex-end; margin-top:6px">
-          <button class="ghost" id="modalCancel">İptal</button>
-          <button class="primary" id="modalSave">Kaydet</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <input id="fileInput" type="file" accept="application/json" style="display:none" />
 
   <script>
-    // Basit client-side "veritabanı" demo. Gerçek uygulamada sunucu tarafı doğrulama + yetkilendirme gerekir.
-    const AUTH_CODE = 'resh4-etik-ACCESS'; // örnek; istersen değiştir
+    const AUTH_CODE = 'resh4-etik-ACCESS'; // örnek kod
     const authBtn = document.getElementById('authBtn');
     const accessCodeInput = document.getElementById('accessCode');
-    const addBtn = document.getElementById('addBtn');
-    const searchInput = document.getElementById('search');
-    const recordsTbody = document.getElementById('recordsTbody');
-    const panelRight = document.getElementById('panelRight');
-    const modalBackdrop = document.getElementById('modalBackdrop');
-    const modalSave = document.getElementById('modalSave');
-    const modalCancel = document.getElementById('modalCancel');
-    const m_subject = document.getElementById('m_subject');
-    const m_details = document.getElementById('m_details');
-    const m_author = document.getElementById('m_author');
-    const m_status = document.getElementById('m_status');
-    const exportBtn = document.getElementById('exportBtn');
-    const importBtn = document.getElementById('importBtn');
-    const fileInput = document.getElementById('fileInput');
-
-    let store = []; // local records
-    let editingId = null;
-
-    // helpers
-    function saveStore(){ localStorage.setItem('etik_store_v1', JSON.stringify(store)); }
-    function loadStore(){ try{ store = JSON.parse(localStorage.getItem('etik_store_v1')||'[]') || []; }catch(e){ store=[] } }
-    function uid(){ return 'EK-'+Date.now().toString(36).toUpperCase().slice(-6); }
-
-    function renderTable(filter){
-      recordsTbody.innerHTML = '';
-      const rows = store.filter(r=>{
-        if(!filter) return true;
-        const q = filter.toLowerCase();
-        return (r.id||'').toLowerCase().includes(q) || (r.subject||'').toLowerCase().includes(q) || (r.author||'').toLowerCase().includes(q) || (r.status||'').toLowerCase().includes(q) || (r.details||'').toLowerCase().includes(q);
-      });
-      if(rows.length===0){
-        const tr = document.createElement('tr');
-        tr.innerHTML = `<td colspan="6" class="small">Kayıt bulunamadı.</td>`;
-        recordsTbody.appendChild(tr); return;
-      }
-      rows.forEach(r=>{
-        const tr = document.createElement('tr');
-        tr.innerHTML = `<td>${r.id}</td>
-                        <td>${escapeHtml(r.subject)}</td>
-                        <td>${r.status}</td>
-                        <td>${escapeHtml(r.author)}</td>
-                        <td class="small">${new Date(r.created).toLocaleString()}</td>
-                        <td>
-                          <button class="ghost" data-action="view" data-id="${r.id}">Görüntüle</button>
-                          <button class="ghost" data-action="edit" data-id="${r.id}">Düzenle</button>
-                          <button class="ghost danger" data-action="delete" data-id="${r.id}">Sil</button>
-                        </td>`;
-        recordsTbody.appendChild(tr);
-      });
-    }
-
-    function escapeHtml(s){ if(!s) return ''; return s.replace(/[&<>\"]/g, c=>({ '&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;' }[c]||c)); }
-
-    function enablePanel(){
-      document.getElementById('search').disabled=false;
-      document.getElementById('addBtn').disabled=false;
-      document.getElementById('accessCode').disabled=true;
-      authBtn.disabled=true;
-      accessCodeInput.value = '';
-    }
 
     authBtn.addEventListener('click', ()=>{
       const val = accessCodeInput.value.trim();
       if(val===AUTH_CODE){
-        enablePanel();
-        loadStore();
-        renderTable();
-        toast('Erişim onaylandı — veritabanı yüklendi.');
+        alert('Erişim onaylandı — welcome.');
       } else {
         alert('Erişim reddedildi. Hatalı kod.');
       }
     });
-
-    searchInput.addEventListener('input', (e)=> renderTable(e.target.value));
-
-    addBtn.addEventListener('click', ()=>{
-      editingId = null;
-      m_subject.value=''; m_details.value=''; m_author.value=''; m_status.value='İnceleniyor';
-      showModal(true, 'Yeni Kayıt');
-    });
-
-    recordsTbody.addEventListener('click', (e)=>{
-      const btn = e.target.closest('button'); if(!btn) return;
-      const action = btn.dataset.action; const id = btn.dataset.id;
-      if(action==='delete'){
-        if(!confirm('Bu kaydı silmek istediğinize emin misiniz?')) return;
-        store = store.filter(x=>x.id!==id);
-        saveStore(); renderTable(searchInput.value);
-      } else if(action==='edit'){
-        const item = store.find(x=>x.id===id); if(!item) return;
-        editingId = id; m_subject.value=item.subject; m_details.value=item.details; m_author.value=item.author; m_status.value=item.status;
-        showModal(true, 'Kayıt Düzenle');
-      } else if(action==='view'){
-        const item = store.find(x=>x.id===id);
-        if(!item) return;
-        alert(`ID: ${item.id}\nKonu: ${item.subject}\nDurum: ${item.status}\nOluşturan: ${item.author}\nTarih: ${new Date(item.created).toLocaleString()}\n\nDetaylar:\n${item.details}`);
-      }
-    });
-
-    modalCancel.addEventListener('click', ()=> showModal(false));
-    modalBackdrop.addEventListener('click', (e)=>{ if(e.target===modalBackdrop) showModal(false); });
-
-    modalSave.addEventListener('click', ()=>{
-      const subject = m_subject.value.trim();
-      if(!subject){ alert('Konu boş olamaz.'); return; }
-      const details = m_details.value.trim();
-      const author = m_author.value.trim() || 'Anonim';
-      const status = m_status.value;
-      if(editingId){
-        const rec = store.find(x=>x.id===editingId); if(rec){ rec.subject=subject; rec.details=details; rec.author=author; rec.status=status; rec.updated = Date.now(); }
-        toast('Kayıt güncellendi.');
-      } else {
-        const rec = { id: uid(), subject, details, author, status, created: Date.now() };
-        store.unshift(rec);
-        toast('Yeni kayıt eklendi.');
-      }
-      saveStore(); renderTable(searchInput.value); showModal(false);
-    });
-
-    function showModal(show, title){
-      document.getElementById('modalTitle').innerText = title || 'Yeni Kayıt';
-      modalBackdrop.style.display = show ? 'flex' : 'none';
-    }
-
-    // export / import
-    exportBtn.addEventListener('click', ()=>{
-      loadStore();
-      const dataStr = JSON.stringify({ exportedAt: Date.now(), data: store }, null, 2);
-      const blob = new Blob([dataStr], { type: 'application/json' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a'); a.href = url; a.download = 'etik-komite-db.json'; a.click(); URL.revokeObjectURL(url);
-    });
-
-    importBtn.addEventListener('click', ()=> fileInput.click());
-    fileInput.addEventListener('change', (e)=>{
-      const f = e.target.files[0]; if(!f) return; const reader = new FileReader();
-      reader.onload = ()=>{
-        try{ const parsed = JSON.parse(reader.result); const incoming = parsed.data || parsed; if(!Array.isArray(incoming)) throw new Error('Geçersiz dosya');
-          if(confirm(incoming.length+ ' kayıt içeri aktarılacak. Mevcut veriler üzerine yazılsın mı? (Hayır = birleştir)')){
-            store = incoming; saveStore(); renderTable(); toast('Veritabanı güncellendi.');
-          } else {
-            store = incoming.concat(store); saveStore(); renderTable(); toast('Veriler birleştirildi.');
-          }
-        }catch(err){ alert('İçe aktarma başarısız: '+err.message); }
-      };
-      reader.readAsText(f);
-      fileInput.value='';
-    });
-
-    // Simple toast
-    function toast(txt){
-      const d = document.createElement('div');
-      d.textContent = txt; d.style.position='fixed'; d.style.right='20px'; d.style.bottom='20px'; d.style.background='linear-gradient(90deg,var(--accent),var(--accent-2))'; d.style.color='#fff'; d.style.padding='10px 14px'; d.style.borderRadius='8px'; d.style.boxShadow='0 8px 30px rgba(0,0,0,0.6)';
-      document.body.appendChild(d);
-      setTimeout(()=> d.style.opacity=0,2000);
-      setTimeout(()=> d.remove(),2600);
-    }
-
-    // Load from storage if already authed in the same session
-    (function(){
-      // nothing auto-enabled by default for safety
-      loadStore();
-    })();
-
   </script>
 </body>
 </html>
