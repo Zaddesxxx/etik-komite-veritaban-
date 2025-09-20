@@ -3,41 +3,39 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Etik Komite Veritabanı</title>
+  <title>Etik Komite Girişi</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header>
-    <div class="logo">🛡️ Etik Komite</div>
-    <nav>
-      <a href="index.html" class="active">Ana Sayfa</a>
-      <a href="members.html">Üyeler</a>
-      <a href="requests.html">Talepler</a>
-    </nav>
-  </header>
+  <div class="login-container">
+    <div class="login-box">
+      <h2>Etik Komite Girişi</h2>
+      <input type="password" id="password" placeholder="Şifreyi girin">
+      <button onclick="checkPassword()">Giriş</button>
+      <p id="error" class="error"></p>
+    </div>
+  </div>
 
-  <main>
-    <section class="hero">
-      <h1>Etik Komite Veritabanı</h1>
-      <p>SCP temalı, modern ve güvenli veritabanı arayüzü</p>
-    </section>
+  <script>
+    const passwords = ["test", "test2"]; // Şifreler
 
-    <section class="cards">
-      <div class="card">
-        <h3>Üyeler</h3>
-        <p>Komite üyelerini görüntüleyin ve detaylarına ulaşın.</p>
-        <a href="members.html" class="btn">Görüntüle</a>
-      </div>
-      <div class="card">
-        <h3>Talepler & Şikayetler</h3>
-        <p>Gönderilen tüm talepleri ve şikayetleri inceleyin.</p>
-        <a href="requests.html" class="btn">Görüntüle</a>
-      </div>
-    </section>
-  </main>
+    function checkPassword() {
+      const pw = document.getElementById('password').value.trim();
+      const error = document.getElementById('error');
 
-  <footer>
-    &copy; 2025 Etik Komite. Tüm hakları saklıdır.
-  </footer>
+      if (passwords.includes(pw)) {
+        window.location.href = "home.html"; // Başarılı giriş
+      } else {
+        error.textContent = "Hatalı şifre. Tekrar deneyin.";
+      }
+    }
+
+    // Enter tuşu ile giriş
+    document.getElementById('password').addEventListener("keypress", function(e) {
+      if (e.key === "Enter") {
+        checkPassword();
+      }
+    });
+  </script>
 </body>
 </html>
