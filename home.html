@@ -6,64 +6,115 @@
 <title>Etik Komite — Rēsh-1 Database</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --bg:#042218;
-    --panel:#0a3525;
-    --accent:#66ff99;
-    --accent-2:#33ff88;
-    --muted:#cdebd1;
-    --glass: rgba(255,255,255,0.03);
-    --radius:14px;
-    font-family: "Inter", "Segoe UI", Roboto, "Courier New", monospace;
-  }
-  *{box-sizing:border-box}
-  body{
-    margin:0;
-    min-height:100vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background: radial-gradient(ellipse at top left, rgba(102,255,153,0.05), transparent 20%), var(--bg);
-    color:var(--muted);
-    padding:24px;
-  }
-  .login-frame, .loading-screen, .home-frame{
-    width:900px;
-    max-width:100%;
-    border-radius:var(--radius);
-    padding:24px;
-    background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));
-    border:1px solid rgba(102,255,153,0.15);
-    box-shadow: 0 8px 40px rgba(0,40,20,0.6);
-    display:none;
-    flex-direction:column;
-    gap:20px;
-  }
+:root{
+  --bg:#042218;
+  --panel:#0a3525;
+  --accent:#66ff99;
+  --accent-2:#33ff88;
+  --muted:#cdebd1;
+  --glass: rgba(255,255,255,0.03);
+  --radius:14px;
+  font-family: "Inter", "Segoe UI", Roboto, "Courier New", monospace;
+}
+*{box-sizing:border-box;}
+body{
+  margin:0;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background: radial-gradient(ellipse at top left, rgba(102,255,153,0.05), transparent 20%), var(--bg);
+  color:var(--muted);
+  padding:24px;
+}
 
-  /* LOGIN */
-  .login-frame{display:flex;}
-  .login-frame .logo{font-size:48px;color:var(--accent);text-align:center;}
-  .login-frame h1{margin:0;font-size:20px;color:var(--accent-2);text-align:center;}
-  .login-frame .classified{font-size:12px;color:#aaffc8;text-align:center;}
-  .login-frame .terminal{width:100%;background:var(--panel);border-radius:10px;padding:12px;font-family:monospace;font-size:13px;color:var(--muted);border:1px solid rgba(102,255,153,0.06);}
-  .login-frame input[type="password"]{width:100%; padding:12px;margin-top:6px;border-radius:10px;border:1px solid rgba(102,255,153,0.08);background:var(--glass);color:var(--muted);}
-  .login-frame button.primary{width:100%;padding:12px;margin-top:16px;border-radius:10px;border:none;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#fff;font-weight:600;cursor:pointer;}
+/* LOGIN */
+.login-frame{
+  width:400px;
+  max-width:100%;
+  border-radius:var(--radius);
+  padding:32px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0));
+  border:1px solid rgba(102,255,153,0.15);
+  box-shadow: 0 8px 40px rgba(0,40,20,0.6);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:24px;
+}
+.login-frame:hover{
+  transform: translateY(-5px);
+  box-shadow: 0 12px 50px rgba(0,40,20,0.7);
+}
+.logo{font-size:48px; color:var(--accent)}
+h1{margin:0; font-size:20px; color:var(--accent-2); text-align:center}
+.classified{font-size:12px; color:#aaffc8; text-align:center}
+.terminal{
+  width:100%;
+  background:var(--panel);
+  border-radius:10px;
+  padding:12px;
+  font-family:monospace;
+  font-size:13px;
+  color:var(--muted);
+  border:1px solid rgba(102,255,153,0.06);
+}
+label{display:block; font-size:12px; color:var(--muted); margin-top:12px}
+input[type="password"]{
+  width:100%; padding:12px; margin-top:6px;
+  border-radius:10px; border:1px solid rgba(102,255,153,0.08);
+  background:var(--glass); color:var(--muted);
+  transition: background 0.3s ease;
+}
+input[type="password"]:focus{ background: rgba(255,255,255,0.06); }
+button.primary{
+  width:100%; padding:12px; margin-top:16px;
+  border-radius:10px; border:none;
+  background:linear-gradient(90deg,var(--accent),var(--accent-2));
+  color:#fff; font-weight:600; cursor:pointer;
+  transition: transform 0.2s ease;
+}
+button.primary:hover{ transform: scale(1.03); }
+.muted-note{font-size:12px; color:#bfa8ff; text-align:center; margin-top:10px}
 
-  /* LOADING */
-  .loading-screen{text-align:center;}
-  .progress-bar{width:100%;height:10px;background:#1a3d2c;border-radius:5px;overflow:hidden;margin:20px 0;}
-  .progress-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--accent),var(--accent-2));transition:width 0.2s;}
-  .percent{ font-size:14px; color:var(--accent-2) }
-  .warn-box{font-size:12px;border:1px solid rgba(255,255,255,0.1);padding:8px;border-radius:6px;color:#ffcc66;text-align:left;}
+/* LOADING */
+.loading-screen{display:none; text-align:center;}
+.progress-bar{
+  width:100%; height:10px; background:#1a3d2c;
+  border-radius:5px; overflow:hidden; margin:20px 0;
+}
+.progress-fill{
+  height:100%; width:0%;
+  background:linear-gradient(90deg,var(--accent),var(--accent-2));
+  transition:width 0.2s;
+}
+.percent{ font-size:14px; color:var(--accent-2) }
+.warn-box{
+  font-size:12px; border:1px solid rgba(255,255,255,0.1);
+  padding:8px; border-radius:6px; color:#ffcc66; text-align:left;
+}
 
-  /* HOME */
-  .home-frame .header{display:flex;justify-content:space-between;align-items:center;}
-  .home-frame .header h1{margin:0;color:var(--accent-2)}
-  .home-frame .session-note{font-size:12px;color:#bfa8ff;}
-  .home-frame .announcements{border-radius:var(--radius);padding:16px;background:var(--panel);border:1px solid rgba(102,255,153,0.06);display:flex;flex-direction:column;gap:12px;}
-  .home-frame .announcement{padding:12px;border-left:4px solid var(--accent);background: rgba(102,255,153,0.02);border-radius:8px;font-size:14px;}
-  .home-frame .announcement strong{color:var(--accent-2);}
-  .home-frame .logout-btn{align-self:flex-end;padding:8px 16px;border-radius:10px;border:none;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#fff;font-weight:600;cursor:pointer;}
+/* HOME */
+.home-frame{
+  width:900px;
+  max-width:100%;
+  border-radius:var(--radius);
+  padding:24px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));
+  border:1px solid rgba(102,255,153,0.15);
+  box-shadow: 0 8px 40px rgba(0,40,20,0.6);
+  display:none;
+  flex-direction:column;
+  gap:20px;
+}
+.home-frame .header{display:flex;justify-content:space-between;align-items:center;}
+.home-frame .header h1{margin:0;color:var(--accent-2)}
+.home-frame .session-note{font-size:12px;color:#bfa8ff;}
+.home-frame .announcements{border-radius:var(--radius);padding:16px;background:var(--panel);border:1px solid rgba(102,255,153,0.06);display:flex;flex-direction:column;gap:12px;}
+.home-frame .announcement{padding:12px;border-left:4px solid var(--accent);background: rgba(102,255,153,0.02);border-radius:8px;font-size:14px;}
+.home-frame .announcement strong{color:var(--accent-2);}
+.home-frame .logout-btn{align-self:flex-end;padding:8px 16px;border-radius:10px;border:none;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#fff;font-weight:600;cursor:pointer;}
+
 </style>
 </head>
 <body>
@@ -83,6 +134,7 @@
     <input id="accessCode" type="password" placeholder="Kod girin" aria-label="security code" />
     <button class="primary" id="authBtn">GİRİŞ</button>
   </div>
+  <div class="muted-note small">[LEVEL 4 CLEARANCE REQUIRED]<br>Yetkisiz erişim disiplin ile sonuçlanır.</div>
 </div>
 
 <!-- LOADING -->
@@ -135,7 +187,7 @@ function checkSession(){
   }
 }
 
-// Show Home
+// Home göster
 function showHome(token){
   loginFrame.style.display='none';
   loadingScreen.style.display='none';
@@ -149,14 +201,14 @@ function showHome(token){
   ];
   announcementsContainer.innerHTML='';
   announcementsData.forEach(a=>{
-    const div = document.createElement('div');
+    const div=document.createElement('div');
     div.className='announcement';
     div.innerHTML=`<strong>${a.author}:</strong> ${a.text}`;
     announcementsContainer.appendChild(div);
   });
 }
 
-// Generate session token
+// Session oluştur
 function generateSession(){
   const chars='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   let token='';
@@ -166,12 +218,12 @@ function generateSession(){
   return token;
 }
 
-// Start loading animation
+// Loading başlat
 function startLoading(){
   loginFrame.style.display='none';
   loadingScreen.style.display='flex';
   let progress=0;
-  const interval = setInterval(()=>{
+  const interval=setInterval(()=>{
     progress += Math.floor(Math.random()*5)+1;
     if(progress>100) progress=100;
     progressFill.style.width = progress+'%';
@@ -188,7 +240,7 @@ function startLoading(){
   },200);
 }
 
-// Login button
+// Login
 authBtn.addEventListener('click',()=>{
   if(accessCodeInput.value.trim()===AUTH_CODE){
     startLoading();
