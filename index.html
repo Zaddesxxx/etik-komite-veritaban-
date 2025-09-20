@@ -27,7 +27,7 @@
       color:var(--muted);
       padding:24px;
     }
-    .login-frame{
+    .login-frame, .loading-screen{
       width:400px;
       max-width:100%;
       border-radius:var(--radius);
@@ -75,14 +75,34 @@
       color:#fff; font-weight:600; cursor:pointer;
       transition: transform 0.2s ease;
     }
-    button.primary:hover{
-      transform: scale(1.03);
-    }
+    button.primary:hover{ transform: scale(1.03); }
     .muted-note{font-size:12px; color:#bfa8ff; text-align:center; margin-top:10px}
+
+    /* LOADING EKRANI */
+    .loading-screen{display:none; text-align:center}
+    .progress-bar{
+      width:100%; height:10px; background:#1a3d2c;
+      border-radius:5px; overflow:hidden; margin:20px 0;
+    }
+    .progress-fill{
+      height:100%; width:0%;
+      background:linear-gradient(90deg,var(--accent),var(--accent-2));
+      transition:width 0.2s;
+    }
+    .percent{ font-size:14px; color:var(--accent-2) }
+    .warn-box{
+      font-size:12px;
+      border:1px solid rgba(255,255,255,0.1);
+      padding:8px;
+      border-radius:6px;
+      color:#ffcc66;
+      text-align:left;
+    }
   </style>
 </head>
 <body>
-  <div class="login-frame">
+  <!-- LOGIN -->
+  <div class="login-frame" id="loginFrame">
     <div class="logo">🛡️</div>
     <h1>Etik Komite Oryantasyonu</h1>
     <div class="classified">🔒 GİZLİ / YALNIZCA YETKİLİ PERSONEL</div>
@@ -102,10 +122,29 @@
     <div class="muted-note small">[LEVEL 4 CLEARANCE REQUIRED]<br>Yetkisiz erişim disiplin ile sonuçlanır.</div>
   </div>
 
+  <!-- LOADING -->
+  <div class="loading-screen" id="loadingScreen">
+    <h1>RÉSH-1 SECURE SYSTEM</h1>
+    <div class="terminal">
+      &gt; Establishing connection to Rēsh-1 database...<br>
+      &gt; Verifying credentials...
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="percent" id="percent">0%</div>
+    <div class="warn-box">
+      > WARNING: This system contains classified information.<br>
+      > Unauthorized access will result in immediate termination.
+    </div>
+  </div>
+
   <script>
     const AUTH_CODE = 'etik-oryantasyon';
     const authBtn = document.getElementById('authBtn');
     const accessCodeInput = document.getElementById('accessCode');
+    const loginFrame = document.getElementById('loginFrame');
+    const loadingScreen = document.getElementById('loadingScreen');
+    const progressFill = document.getElementById('progressFill');
+    const percent = document.getElementById('percent');
 
     function generateRandomPage() {
       const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -114,10 +153,28 @@
       return `home.html?session=${token}`;
     }
 
+    function startLoading(){
+      loginFrame.style.display = 'none';
+      loadingScreen.style.display = 'flex';
+      let progress = 0;
+      const interval = setInterval(()=>{
+        progress += Math.floor(Math.random()*5)+1; // 1-5 artış
+        if(progress > 100) progress = 100;
+        progressFill.style.width = progress + '%';
+        percent.textContent = progress + '%';
+        if(progress === 100){
+          clearInterval(interval);
+          setTimeout(()=>{
+            window.location.href = generateRandomPage();
+          }, 700);
+        }
+      }, 200);
+    }
+
     authBtn.addEventListener('click', ()=>{
       const val = accessCodeInput.value.trim();
       if(val === AUTH_CODE){
-        window.location.href = generateRandomPage();
+        startLoading();
       } else {
         alert('Erişim reddedildi. Hatalı kod.');
       }
