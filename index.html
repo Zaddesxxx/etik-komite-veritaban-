@@ -3,198 +3,136 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Etik Komite — Giriş</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <title>Etik Komite — Rēsh-1 Secure</title>
   <style>
     :root{
-      --bg:#042218;
-      --panel:#0a3525;
-      --accent:#66ff99;
-      --accent-2:#33ff88;
-      --muted:#cdebd1;
-      --glass: rgba(255,255,255,0.03);
-      --radius:14px;
-      font-family: "Inter", "Segoe UI", Roboto, "Courier New", monospace;
+      --bg:#08020a;
+      --panel:#140024;
+      --accent:#a64dff;
+      --accent-2:#b366ff;
+      --muted:#cdbfff;
+      --danger:#ff4d4d;
+      --yellow:#f7c948;
+      font-family: "Courier New", monospace;
     }
-    *{box-sizing:border-box}
     body{
       margin:0;
       min-height:100vh;
       display:flex;
       align-items:center;
       justify-content:center;
-      background: radial-gradient(ellipse at top left, rgba(102,255,153,0.05), transparent 20%), var(--bg);
+      background: var(--bg);
       color:var(--muted);
-      padding:24px;
     }
     .hidden{display:none}
-    /* Login & Loading */
-    .login-frame, .loading-screen{
-      width:400px;
-      max-width:100%;
-      border-radius:var(--radius);
-      padding:32px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0));
-      border:1px solid rgba(102,255,153,0.15);
-      box-shadow: 0 8px 40px rgba(0,40,20,0.6);
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      gap:24px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    /* Loading screen */
+    .loading{
+      text-align:center;
+      color:var(--yellow);
+      padding:20px;
     }
-    .login-frame:hover{ transform: translateY(-5px); box-shadow:0 12px 50px rgba(0,40,20,0.7);}
-    .logo{font-size:48px; color:var(--accent)}
-    h1{margin:0; font-size:20px; color:var(--accent-2); text-align:center}
-    .classified{font-size:12px; color:#aaffc8; text-align:center}
-    .terminal{width:100%; background:var(--panel); border-radius:10px; padding:12px; font-family:monospace; font-size:13px; color:var(--muted); border:1px solid rgba(102,255,153,0.06);}
-    label{display:block; font-size:12px; color:var(--muted); margin-top:12px}
-    input[type="password"]{width:100%; padding:12px; margin-top:6px; border-radius:10px; border:1px solid rgba(102,255,153,0.08); background:var(--glass); color:var(--muted); transition: background 0.3s ease;}
-    input[type="password"]:focus{background: rgba(255,255,255,0.06);}
-    button.primary{width:100%; padding:12px; margin-top:16px; border-radius:10px; border:none; background:linear-gradient(90deg,var(--accent),var(--accent-2)); color:#fff; font-weight:600; cursor:pointer; transition: transform 0.2s ease;}
-    button.primary:hover{transform: scale(1.03);}
-    .muted-note{font-size:12px; color:#bfa8ff; text-align:center; margin-top:10px}
-    /* Loading */
-    .progress-bar{width:100%; height:10px; background:#1a3d2c; border-radius:5px; overflow:hidden; margin:20px 0;}
-    .progress-fill{height:100%; width:0%; background:linear-gradient(90deg,var(--accent),var(--accent-2)); transition:width 0.2s;}
-    .percent{ font-size:14px; color:var(--accent-2) }
-    .warn-box{font-size:12px; border:1px solid rgba(255,255,255,0.1); padding:8px; border-radius:6px; color:#ffcc66; text-align:left;}
-    /* Home */
-    .home-frame{width:900px; max-width:100%; border-radius:var(--radius); padding:24px; background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005)); border:1px solid rgba(102,255,153,0.15); box-shadow:0 8px 40px rgba(0,40,20,0.6); display:flex; flex-direction:column; gap:20px;}
-    .header{display:flex; justify-content:space-between; align-items:center;}
-    .header h1{margin:0; color:var(--accent-2)}
-    .session-note{font-size:12px; color:#bfa8ff;}
-    .announcements{border-radius:var(--radius); padding:16px; background:var(--panel); border:1px solid rgba(102,255,153,0.06); display:flex; flex-direction:column; gap:12px;}
-    .announcement{padding:12px; border-left:4px solid var(--accent); background: rgba(102,255,153,0.02); border-radius:8px; font-size:14px;}
-    .announcement strong{color:var(--accent-2);}
-    .logout-btn{align-self:flex-end; padding:8px 16px; border-radius:10px; border:none; background:linear-gradient(90deg,var(--accent),var(--accent-2)); color:#fff; font-weight:600; cursor:pointer;}
+    .loading h1{font-size:20px; margin-bottom:10px; color:var(--yellow)}
+    .loading p{margin:4px 0;}
+    .progress-bar{width:400px; max-width:90%; height:10px; background:#222; margin:20px auto; border-radius:5px; overflow:hidden}
+    .progress-fill{height:100%; width:0; background:var(--yellow); transition:width 0.2s}
+    .warning-box{border:1px solid #664; background:rgba(255,255,0,0.05); padding:10px; margin-top:20px; font-size:13px; color:#bca;}
+
+    /* Main frame */
+    .frame{width:930px; max-width:100%; border-radius:14px; padding:26px; background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border:1px solid rgba(166,77,255,0.15); box-shadow: 0 8px 40px rgba(40,0,60,0.6); display:grid; grid-template-columns: 360px 1fr; gap:20px;}
+    .left{padding:18px; border-radius:10px; background: linear-gradient(180deg, rgba(166,77,255,0.02), transparent); border:1px solid rgba(166,77,255,0.06); display:flex; flex-direction:column; gap:12px;}
+    .logo{font-size:36px; color:var(--accent); text-align:center}
+    h1{margin:4px 0 0 0; font-size:18px; color:var(--accent-2); text-align:center}
+    .classified{font-size:12px; text-align:center; color:#ff9ad1}
+    .terminal{background:var(--panel); border-radius:8px; padding:10px; font-size:13px; border:1px solid rgba(166,77,255,0.06)}
+    label{display:block; font-size:12px; margin-top:6px}
+    input{width:100%; padding:10px; margin-top:6px; border-radius:8px; border:1px solid rgba(166,77,255,0.08); background:rgba(255,255,255,0.03); color:var(--muted)}
+    button.primary{width:100%; padding:10px; border-radius:8px; border:none; background:linear-gradient(90deg,var(--accent),var(--accent-2)); color:#fff; font-weight:600; cursor:pointer}
+    button.ghost{background:transparent; border:1px solid rgba(166,77,255,0.12); color:var(--muted); padding:8px; border-radius:8px; cursor:pointer}
+    .right{padding:18px; border-radius:10px; background: linear-gradient(180deg, rgba(255,255,255,0.01), transparent); border:1px solid rgba(166,77,255,0.04); display:flex; flex-direction:column; gap:12px;}
+    .toolbar{display:flex; gap:8px; align-items:center}
+    .search{flex:1}
+    .table-wrap{overflow:auto; border-radius:8px; border:1px solid rgba(166,77,255,0.04); background:rgba(0,0,0,0.25); padding:8px}
+    table{width:100%; border-collapse:collapse; font-size:13px}
+    th, td{padding:10px; text-align:left; border-bottom:1px dashed rgba(166,77,255,0.03)}
+    th{font-size:12px; color:#e6dbff; font-weight:600}
+    .small{font-size:12px}
+
+    @media(max-width:800px){.frame{grid-template-columns:1fr;}}
   </style>
 </head>
 <body>
-  <!-- LOGIN -->
-  <div class="login-frame" id="loginFrame">
-    <div class="logo">🛡️</div>
-    <h1>Etik Komite Oryantasyonu</h1>
-    <div class="classified">🔒 GİZLİ / YALNIZCA YETKİLİ PERSONEL</div>
-    <div class="terminal">
-      &gt; FOUNDATION SECURE NETWORK<br>
-      Etik Komite giriş modülü.<br>
-      <strong>Kimlik doğrulama gereklidir.</strong>
-    </div>
-    <div style="width:100%">
-      <label for="accessCode">SECURITY CLEARANCE CODE</label>
-      <input id="accessCode" type="password" placeholder="Kod girin" aria-label="security code" />
-      <button class="primary" id="authBtn">GİRİŞ</button>
-    </div>
-    <div class="muted-note small">[LEVEL 4 CLEARANCE REQUIRED]<br>Yetkisiz erişim disiplin ile sonuçlanır.</div>
-  </div>
 
-  <!-- LOADING -->
-  <div class="loading-screen hidden" id="loadingScreen">
-    <h1>RÉSH-1 SECURE SYSTEM</h1>
-    <div class="terminal">
-      &gt; Establishing connection to Rēsh-1 database...<br>
-      &gt; Verifying credentials...
-    </div>
-    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
-    <div class="percent" id="percent">0%</div>
-    <div class="warn-box">
+  <!-- Loading screen -->
+  <div id="loadingScreen" class="loading hidden">
+    <h1>RĒSH-1 SECURE SYSTEM</h1>
+    <p>> Establishing connection to Rēsh-1 database...</p>
+    <p style="color:var(--accent)">> Verifying credentials...</p>
+    <div class="progress-bar"><div id="progressFill" class="progress-fill"></div></div>
+    <div id="progressText">0%</div>
+    <div class="warning-box">
       > WARNING: This system contains classified information.<br>
       > Unauthorized access will result in immediate termination.
     </div>
   </div>
 
-  <!-- HOME -->
-  <div class="home-frame hidden" id="homeFrame">
-    <div class="header">
-      <h1>Etik Komite Oryantasyonu</h1>
-      <button class="logout-btn" id="logoutBtn">ÇIKIŞ</button>
+  <!-- Main frame -->
+  <div id="mainFrame" class="frame">
+    <div class="left">
+      <div class="logo">🛡️</div>
+      <h1>Etik Komite — Rēsh-1</h1>
+      <div class="classified">🔒 GİZLİ / YALNIZCA YETKİLİ PERSONEL</div>
+      <div class="terminal">> FOUNDATION SECURE NETWORK<br>Accessing Rēsh-1 ("Seat of Consciousness") — Etik Komite modülü.<br><strong>Kimlik doğrulama gereklidir.</strong></div>
+      <div>
+        <label for="accessCode">SECURITY CLEARANCE CODE</label>
+        <input id="accessCode" type="password" placeholder="Enter access code" />
+        <button class="primary" id="authBtn">AUTHENTICATE</button>
+      </div>
+      <div class="small">[LEVEL 4 CLEARANCE REQUIRED]</div>
     </div>
-    <div class="session-note" id="sessionNote"></div>
-    <div class="announcements" id="announcements"></div>
+    <div class="right">
+      <p class="small">Kimlik doğrulaması yapılmadı.</p>
+    </div>
   </div>
 
   <script>
-    const AUTH_CODE = 'etik-oryantasyon';
+    const AUTH_CODE = 'resh4-etik-ACCESS';
     const authBtn = document.getElementById('authBtn');
     const accessCodeInput = document.getElementById('accessCode');
-    const loginFrame = document.getElementById('loginFrame');
+    const mainFrame = document.getElementById('mainFrame');
     const loadingScreen = document.getElementById('loadingScreen');
     const progressFill = document.getElementById('progressFill');
-    const percent = document.getElementById('percent');
-    const homeFrame = document.getElementById('homeFrame');
-    const sessionNote = document.getElementById('sessionNote');
-    const announcementsContainer = document.getElementById('announcements');
-    const logoutBtn = document.getElementById('logoutBtn');
-
-    // Anonslar
-    const announcementsData = [
-      {author:"Komite Başkanı", text:"Evet selam dostlar, bu duyuru gören sen. Komite veritabanımız açılmıştır, duyurular buradan paylaşılacak."},
-      {author:"Komite Başkanı", text:"TEST"},
-      {author:"Komite Başkanı", text:"TEST"}
-    ];
-
-    function generateSession(){
-      const chars='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-      let token='';
-      for(let i=0;i<8;i++){ token+=chars.charAt(Math.floor(Math.random()*chars.length)); }
-      return token;
-    }
-
-    function showHome(session){
-      loginFrame.classList.add('hidden');
-      loadingScreen.classList.add('hidden');
-      homeFrame.classList.remove('hidden');
-      sessionNote.textContent = `Session ID: ${session}`;
-      announcementsContainer.innerHTML='';
-      announcementsData.forEach(a=>{
-        const div=document.createElement('div');
-        div.className='announcement';
-        div.innerHTML=`<strong>${a.author}:</strong> ${a.text}`;
-        announcementsContainer.appendChild(div);
-      });
-    }
-
-    function startLoading(){
-      loginFrame.classList.add('hidden');
-      loadingScreen.classList.remove('hidden');
-      let progress=0;
-      const interval=setInterval(()=>{
-        progress+=Math.floor(Math.random()*5)+1;
-        if(progress>100) progress=100;
-        progressFill.style.width=progress+'%';
-        percent.textContent=progress+'%';
-        if(progress===100){
-          clearInterval(interval);
-          setTimeout(()=>{
-            const session=generateSession();
-            window.history.replaceState({},'',`?session=${session}`);
-            showHome(session);
-          },700);
-        }
-      },200);
-    }
+    const progressText = document.getElementById('progressText');
 
     authBtn.addEventListener('click', ()=>{
-      if(accessCodeInput.value.trim()===AUTH_CODE) startLoading();
-      else alert('Erişim reddedildi. Hatalı kod.');
+      const val = accessCodeInput.value.trim();
+      if(val===AUTH_CODE){
+        // Hide login frame, show loading
+        mainFrame.classList.add('hidden');
+        loadingScreen.classList.remove('hidden');
+        let progress=0;
+        const interval = setInterval(()=>{
+          progress += Math.floor(Math.random()*8)+3;
+          if(progress>100) progress=100;
+          progressFill.style.width = progress+'%';
+          progressText.textContent = progress+'%';
+          if(progress>=100){
+            clearInterval(interval);
+            setTimeout(()=>{
+              // Doğru şifre → home.html’e yönlendir
+              window.location.href = 'home.html';
+            },800);
+          }
+        },400);
+      } else {
+        alert('❌ Erişim reddedildi. Hatalı kod.');
+      }
     });
 
-    accessCodeInput.addEventListener('keypress', e=>{
-      if(e.key==='Enter') authBtn.click();
+    // Enter tuşu ile giriş
+    accessCodeInput.addEventListener('keypress', function(e){
+      if(e.key==='Enter'){ authBtn.click(); }
     });
-
-    logoutBtn.addEventListener('click', ()=>{
-      homeFrame.classList.add('hidden');
-      loginFrame.classList.remove('hidden');
-      accessCodeInput.value='';
-      window.history.replaceState({},'', window.location.pathname);
-    });
-
-    // Sayfa reload edildiğinde session kontrolü
-    const urlParams = new URLSearchParams(window.location.search);
-    const session = urlParams.get('session');
-    if(session) showHome(session);
   </script>
 </body>
 </html>
