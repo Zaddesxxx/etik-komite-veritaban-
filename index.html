@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Etik Komite — Rēsh-1 Database</title>
+  <title>Etik Komite — Giriş</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
     :root{
@@ -27,92 +27,104 @@
       color:var(--muted);
       padding:24px;
     }
-    .frame{
-      width:900px;
+    .login-frame{
+      width:400px;
       max-width:100%;
       border-radius:var(--radius);
-      padding:24px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));
+      padding:32px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0));
       border:1px solid rgba(102,255,153,0.15);
       box-shadow: 0 8px 40px rgba(0,40,20,0.6);
       display:flex;
       flex-direction:column;
-      gap:20px;
+      align-items:center;
+      gap:24px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-    .header{display:flex; justify-content:space-between; align-items:center;}
-    .header h1{margin:0; color:var(--accent-2)}
-    .session-note{font-size:12px; color:#bfa8ff;}
-    .announcements{
-      border-radius:var(--radius);
-      padding:16px;
+    .login-frame:hover{
+      transform: translateY(-5px);
+      box-shadow: 0 12px 50px rgba(0,40,20,0.7);
+    }
+    .logo{font-size:48px; color:var(--accent)}
+    h1{margin:0; font-size:20px; color:var(--accent-2); text-align:center}
+    .classified{font-size:12px; color:#aaffc8; text-align:center}
+    .terminal{
+      width:100%;
       background:var(--panel);
-      border:1px solid rgba(102,255,153,0.06);
-      display:flex;
-      flex-direction:column;
-      gap:12px;
-    }
-    .announcement{
-      padding:12px;
-      border-left:4px solid var(--accent);
-      background: rgba(102,255,153,0.02);
-      border-radius:8px;
-      font-size:14px;
-    }
-    .announcement strong{color:var(--accent-2);}
-    .logout-btn{
-      align-self:flex-end;
-      padding:8px 16px;
       border-radius:10px;
-      border:none;
-      background:linear-gradient(90deg,var(--accent),var(--accent-2));
-      color:#fff;
-      font-weight:600;
-      cursor:pointer;
+      padding:12px;
+      font-family:monospace;
+      font-size:13px;
+      color:var(--muted);
+      border:1px solid rgba(102,255,153,0.06);
     }
+    label{display:block; font-size:12px; color:var(--muted); margin-top:12px}
+    input[type="password"]{
+      width:100%; padding:12px; margin-top:6px;
+      border-radius:10px; border:1px solid rgba(102,255,153,0.08);
+      background:var(--glass); color:var(--muted);
+      transition: background 0.3s ease;
+    }
+    input[type="password"]:focus{
+      background: rgba(255,255,255,0.06);
+    }
+    button.primary{
+      width:100%; padding:12px; margin-top:16px;
+      border-radius:10px; border:none;
+      background:linear-gradient(90deg,var(--accent),var(--accent-2));
+      color:#fff; font-weight:600; cursor:pointer;
+      transition: transform 0.2s ease;
+    }
+    button.primary:hover{
+      transform: scale(1.03);
+    }
+    .muted-note{font-size:12px; color:#bfa8ff; text-align:center; margin-top:10px}
   </style>
 </head>
 <body>
-  <div class="frame">
-    <div class="header">
-      <h1>Etik Komite — Rēsh-1</h1>
-      <button class="logout-btn" id="logoutBtn">ÇIKIŞ</button>
+  <div class="login-frame">
+    <div class="logo">🛡️</div>
+    <h1>Etik Komite Oryantasyonu</h1>
+    <div class="classified">🔒 GİZLİ / YALNIZCA YETKİLİ PERSONEL</div>
+
+    <div class="terminal">
+      &gt; FOUNDATION SECURE NETWORK<br>
+      Etik Komite giriş modülü.<br>
+      <strong>Kimlik doğrulama gereklidir.</strong>
     </div>
-    <div class="session-note" id="sessionNote"></div>
-    <div class="announcements" id="announcements">
-      <!-- Anonslar buraya JS ile eklenecek -->
+
+    <div style="width:100%">
+      <label for="accessCode">SECURITY CLEARANCE CODE</label>
+      <input id="accessCode" type="password" placeholder="Kod girin" aria-label="security code" />
+      <button class="primary" id="authBtn">GİRİŞ</button>
     </div>
+
+    <div class="muted-note small">[LEVEL 4 CLEARANCE REQUIRED]<br>Yetkisiz erişim disiplin ile sonuçlanır.</div>
   </div>
 
   <script>
-    // Session kontrolü
-    const params = new URLSearchParams(window.location.search);
-    const session = params.get('session');
-    const sessionNote = document.getElementById('sessionNote');
-    if(!session){
-      alert('Geçersiz veya süresi dolmuş session! Giriş sayfasına yönlendiriliyorsunuz.');
-      window.location.href = 'index.html';
-    } else {
-      sessionNote.textContent = `Session ID: ${session}`;
+    const AUTH_CODE = 'etik-oryantasyon';
+    const authBtn = document.getElementById('authBtn');
+    const accessCodeInput = document.getElementById('accessCode');
+
+    function generateRandomPage() {
+      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+      let token = '';
+      for(let i=0;i<8;i++){ token += chars.charAt(Math.floor(Math.random()*chars.length)); }
+      return `home.html?session=${token}`;
     }
 
-    // Anonslar
-    const announcementsData = [
-      {author:"Komite Başkanı", text:"Raporlar tamamlandı. Tüm üyeler kontrol edin."},
-      {author:"Komite Başkanı", text:"Yeni Etik Protokol 3.2 etkinleştirildi."},
-      {author:"Komite Başkanı", text:"Yalnızca Level 4 kullanıcılar Rēsh-1 veritabanına erişebilir."}
-    ];
-
-    const announcementsContainer = document.getElementById('announcements');
-    announcementsData.forEach(a=>{
-      const div = document.createElement('div');
-      div.className = 'announcement';
-      div.innerHTML = `<strong>${a.author}:</strong> ${a.text}`;
-      announcementsContainer.appendChild(div);
+    authBtn.addEventListener('click', ()=>{
+      const val = accessCodeInput.value.trim();
+      if(val === AUTH_CODE){
+        window.location.href = generateRandomPage();
+      } else {
+        alert('Erişim reddedildi. Hatalı kod.');
+      }
     });
 
-    // Logout
-    document.getElementById('logoutBtn').addEventListener('click', ()=>{
-      window.location.href = 'index.html';
+    accessCodeInput.addEventListener('keypress', function(e){
+      if(e.key === 'Enter'){ authBtn.click(); }
     });
   </script>
 </body>
