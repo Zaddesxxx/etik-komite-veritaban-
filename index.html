@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Etik Komite Girişi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -17,24 +18,20 @@
   </div>
 
   <script>
-    const passwords = ["test", "test2"]; // Şifreler
+    const passwords = ["test","test2"];
 
     function checkPassword() {
       const pw = document.getElementById('password').value.trim();
       const error = document.getElementById('error');
-
       if (passwords.includes(pw)) {
-        window.location.href = "home.html"; // Başarılı giriş
+        window.location.href = "home.html";
       } else {
         error.textContent = "Hatalı şifre. Tekrar deneyin.";
       }
     }
 
-    // Enter tuşu ile giriş
-    document.getElementById('password').addEventListener("keypress", function(e) {
-      if (e.key === "Enter") {
-        checkPassword();
-      }
+    document.getElementById('password').addEventListener("keypress", function(e){
+      if(e.key === "Enter") checkPassword();
     });
   </script>
 </body>
