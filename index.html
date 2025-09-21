@@ -98,8 +98,8 @@
       padding:12px;
       border-radius:10px;
       border:2px solid #33ff88;
-      background:#042218; /* karanlık gövde */
-      color:#33ff88; /* yeşil yazı */
+      background:#042218;
+      color:#33ff88;
       font-weight:600;
       cursor:pointer;
       transition:0.3s;
@@ -119,14 +119,6 @@
       height:18px;
       fill:currentColor;
     }
-    .creator-box{
-      text-align:center;
-      color: var(--muted);
-      font-size: 13px;
-      margin-top: 10px;
-    }
-    .creator-box strong{color: var(--accent-2);}
-    .creator-box span{color:#66ff99;}
   </style>
 </head>
 <body>
@@ -147,14 +139,12 @@
       <button class="primary" id="authBtn">GİRİŞ</button>
     </div>
 
-    <!-- Kamuya Açık Erişim -->
     <button class="public-access" onclick="window.location.href='kamu.html'">
       Kamuya Açık Erişim
     </button>
 
     <div class="muted-note small">[LEVEL-EK ERİŞİM SEVİYESİ GEREKLİDİR]<br>Yetkisiz erişim disiplin ile sonuçlanır.</div>
 
-    <!-- Discord Sunucu Butonu -->
     <button class="discord-btn" onclick="window.open('https://discord.gg/sUUvueFUqT','_blank')">
       <svg viewBox="0 0 24 24">
         <path d="M20.317 4.3698a19.7913 19.7913 0 0 0-4.885 2.256 18.8173 18.8173 0 0 0-5.527-2.256c-.262.473-.562 1.09-.77 1.592-3.857.562-5.441 3.162-5.441 3.162-.365.797-.562 1.594-.562 2.444 0 5.447 7.375 9.874 16.468 9.874 9.093 0 16.469-4.427 16.469-9.874 0-.85-.197-1.647-.562-2.444 0 0-1.584-2.6-5.441-3.162-.208-.502-.508-1.119-.77-1.592zM8.02 15.331c-1.182 0-2.154-1.087-2.154-2.428 0-1.341.95-2.428 2.154-2.428 1.218 0 2.182 1.087 2.154 2.428 0 1.341-.936 2.428-2.154 2.428zm7.962 0c-1.182 0-2.154-1.087-2.154-2.428 0-1.341.95-2.428 2.154-2.428 1.218 0 2.182 1.087 2.154 2.428 0 1.341-.936 2.428-2.154 2.428z"/>
@@ -162,11 +152,13 @@
       Etik Komite Discord Sunucusu
     </button>
 
-    <!-- Discord ve Roblox Bilgileri -->
-    <div class="creator-box">
-      <div><strong>Discord:</strong> <span>.zaddes</span></div>
-      <div><strong>Roblox:</strong> <span>denizxd766</span></div>
-    </div>
+    <button class="discord-btn" onclick="window.open('https://discord.gg/nova','_blank')">
+      <svg viewBox="0 0 24 24">
+        <path d="M12 0C5.3726 0 0 5.3726 0 12C0 18.6274 5.3726 24 12 24C18.6274 24 24 18.6274 24 12C24 5.3726 18.6274 0 12 0ZM12 21.6C6.3828 21.6 2.4 17.6172 2.4 12C2.4 6.3828 6.3828 2.4 12 2.4C17.6172 2.4 21.6 6.3828 21.6 12C21.6 17.6172 17.6172 21.6 12 21.6Z"/>
+      </svg>
+      Nova Roleplay
+    </button>
+
   </div>
 
   <script>
