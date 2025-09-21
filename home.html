@@ -22,7 +22,6 @@
       min-height:100vh;
       background: radial-gradient(ellipse at top left, rgba(102,255,153,0.05), transparent 20%), var(--bg);
       color:var(--muted);
-      font-family: var(--font-family);
       display:flex;
       flex-direction:column;
       align-items:center;
@@ -74,10 +73,30 @@
 </head>
 <body>
   <script>
-    // session parametre kontrolü
+    // --- Session kontrolü ---
     const urlParams = new URLSearchParams(window.location.search);
     const session = urlParams.get('session');
-    if(!session){ window.location.href = 'index.html'; }
+    const SESSION_KEY = `session_${session}`;
+
+    if(!session){
+      alert('Geçersiz session! Giriş sayfasına yönlendiriliyorsunuz.');
+      window.location.href = 'index.html';
+    } else {
+      const now = Date.now();
+      const existing = localStorage.getItem(SESSION_KEY);
+
+      if(!existing){
+        // Yeni session, zaman kaydet
+        localStorage.setItem(SESSION_KEY, now);
+      } else {
+        const createdTime = parseInt(existing);
+        if(now - createdTime > 5 * 60 * 1000){ // 5 dakika
+          alert('Session süresi doldu! Giriş sayfasına yönlendiriliyorsunuz.');
+          localStorage.removeItem(SESSION_KEY);
+          window.location.href = 'index.html';
+        }
+      }
+    }
   </script>
 
   <header>
