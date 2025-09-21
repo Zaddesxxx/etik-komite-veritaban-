@@ -33,7 +33,7 @@ header{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  margin-bottom:20px;
+  margin-bottom:40px;
 }
 header h1{ color: var(--accent-2); font-size:1.8em; }
 header a{
@@ -46,14 +46,6 @@ header a{
   transition:0.3s;
 }
 header a:hover{ background: rgba(0,70,0,0.6); }
-
-#sessionCountdown{
-  color: var(--accent);
-  font-weight:600;
-  margin-bottom:20px;
-  font-size:1.1em;
-}
-
 .announcements{
   width:100%;
   max-width:900px;
@@ -85,48 +77,25 @@ footer{ margin-top:50px; color:#aaa; font-size:0.9em; text-align:center; }
   const urlParams = new URLSearchParams(window.location.search);
   const session = urlParams.get('session');
   const SESSION_KEY = `session_${session}`;
-  const SESSION_DURATION = 2 * 60 * 1000; // 2 dakika
 
   if(!session){
     alert('Geçersiz session! Giriş sayfasına yönlendiriliyorsunuz.');
     window.location.href = 'index.html';
   } else {
     const now = Date.now();
-    let startTime = localStorage.getItem(SESSION_KEY);
+    const existing = localStorage.getItem(SESSION_KEY);
 
-    if(!startTime){
-      startTime = now;
-      localStorage.setItem(SESSION_KEY, startTime);
+    if(!existing){
+      // Yeni session, zaman kaydet
+      localStorage.setItem(SESSION_KEY, now);
     } else {
-      startTime = parseInt(startTime);
-      if(now - startTime > SESSION_DURATION){
+      const createdTime = parseInt(existing);
+      if(now - createdTime > 2 * 60 * 1000){ // 2 dakika
         alert('Session süresi doldu! Giriş sayfasına yönlendiriliyorsunuz.');
         localStorage.removeItem(SESSION_KEY);
         window.location.href = 'index.html';
       }
     }
-
-    // Countdown
-    const countdownEl = document.createElement('div');
-    countdownEl.id = 'sessionCountdown';
-    document.body.insertBefore(countdownEl, document.querySelector('.announcements'));
-
-    function updateCountdown(){
-      const now = Date.now();
-      const remaining = Math.max(0, SESSION_DURATION - (now - startTime));
-      const minutes = String(Math.floor(remaining / 60000)).padStart(2, '0');
-      const seconds = String(Math.floor((remaining % 60000) / 1000)).padStart(2, '0');
-      countdownEl.textContent = `Session kapanıyor: ${minutes}:${seconds}`;
-
-      if(remaining <= 0){
-        alert('Session süresi doldu! Giriş sayfasına yönlendiriliyorsunuz.');
-        localStorage.removeItem(SESSION_KEY);
-        window.location.href = 'index.html';
-      }
-    }
-
-    setInterval(updateCountdown, 1000);
-    updateCountdown();
   }
 </script>
 
