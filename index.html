@@ -85,7 +85,7 @@
   <div class="login-frame">
     <div class="logo">⚖️</div>
     <h1>Etik Komite Oryantasyonu</h1>
-    <div class="classified"> GİZLİ / YALNIZCA YETKİLİ PERSONEL</div>
+    <div class="classified">GİZLİ / YALNIZCA YETKİLİ PERSONEL</div>
 
     <div class="terminal">
       &gt; FOUNDATION SECURE NETWORK<br>
@@ -103,7 +103,9 @@
   </div>
 
   <script>
-    const AUTH_CODE = 'etik-oryantasyon';
+    // Birden fazla şifre desteği
+    const AUTH_CODES = ['nona_EKK8476', 'komite123', 'gizli456'];
+
     const authBtn = document.getElementById('authBtn');
     const accessCodeInput = document.getElementById('accessCode');
 
@@ -116,7 +118,7 @@
 
     authBtn.addEventListener('click', ()=>{
       const val = accessCodeInput.value.trim();
-      if(val === AUTH_CODE){
+      if(AUTH_CODES.includes(val)){
         window.location.href = generateRandomPage();
       } else {
         alert('Erişim reddedildi. Hatalı kod.');
