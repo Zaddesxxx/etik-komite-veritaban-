@@ -1,124 +1,124 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Etik Komite — Ana Sayfa</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-  <style>
-    :root{
-      --bg:#042218;
-      --panel:#0a3525;
-      --accent:#66ff99;
-      --accent-2:#33ff88;
-      --muted:#cdebd1;
-      --glass: rgba(255,255,255,0.03);
-      --radius:14px;
-      font-family: "Inter", sans-serif;
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      min-height:100vh;
-      background: radial-gradient(ellipse at top left, rgba(102,255,153,0.05), transparent 20%), var(--bg);
-      color:var(--muted);
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      padding:24px;
-    }
-    header{
-      width:100%;
-      max-width:900px;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      margin-bottom:40px;
-    }
-    header h1{ color: var(--accent-2); font-size:1.8em; }
-    header a{
-      color: var(--accent);
-      text-decoration:none;
-      font-weight:600;
-      padding:8px 12px;
-      border-radius:10px;
-      background: rgba(0,70,0,0.4);
-      transition:0.3s;
-    }
-    header a:hover{ background: rgba(0,70,0,0.6); }
-    .announcements{
-      width:100%;
-      max-width:900px;
-      display:flex;
-      flex-direction:column;
-      gap:20px;
-    }
-    .announcement{
-      background: var(--glass);
-      backdrop-filter: blur(10px);
-      padding:20px;
-      border-radius:var(--radius);
-      border:1px solid rgba(102,255,153,0.1);
-      box-shadow: 0 6px 20px rgba(0,40,20,0.6);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .announcement:hover{
-      transform: translateY(-3px);
-      box-shadow: 0 10px 25px rgba(0,40,20,0.7);
-    }
-    .announcement h3{ margin:0 0 10px 0; color: var(--accent-2); }
-    .announcement p{ margin:0; color: var(--muted); line-height:1.5; }
-    footer{ margin-top:50px; color:#aaa; font-size:0.9em; text-align:center; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Etik Komite — Ana Sayfa</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#042218;
+  --panel:#0a3525;
+  --accent:#66ff99;
+  --accent-2:#33ff88;
+  --muted:#cdebd1;
+  --glass: rgba(255,255,255,0.03);
+  --radius:14px;
+  font-family: "Inter", sans-serif;
+}
+*{box-sizing:border-box;}
+body{
+  margin:0;
+  min-height:100vh;
+  background: radial-gradient(ellipse at top left, rgba(102,255,153,0.05), transparent 20%), var(--bg);
+  color:var(--muted);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding:24px;
+}
+header{
+  width:100%;
+  max-width:900px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:40px;
+}
+header h1{ color: var(--accent-2); font-size:1.8em; }
+header a{
+  color: var(--accent);
+  text-decoration:none;
+  font-weight:600;
+  padding:8px 12px;
+  border-radius:10px;
+  background: rgba(0,70,0,0.4);
+  transition:0.3s;
+}
+header a:hover{ background: rgba(0,70,0,0.6); }
+.announcements{
+  width:100%;
+  max-width:900px;
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+}
+.announcement{
+  background: var(--glass);
+  backdrop-filter: blur(10px);
+  padding:20px;
+  border-radius:var(--radius);
+  border:1px solid rgba(102,255,153,0.1);
+  box-shadow: 0 6px 20px rgba(0,40,20,0.6);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.announcement:hover{
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0,40,20,0.7);
+}
+.announcement h3{ margin:0 0 10px 0; color: var(--accent-2); }
+.announcement p{ margin:0; color: var(--muted); line-height:1.5; }
+footer{ margin-top:50px; color:#aaa; font-size:0.9em; text-align:center; }
+</style>
 </head>
 <body>
-  <script>
-    // --- Session kontrolü ---
-    const urlParams = new URLSearchParams(window.location.search);
-    const session = urlParams.get('session');
-    const SESSION_KEY = `session_${session}`;
+<script>
+  // --- Session kontrolü (2 dakika geçerli) ---
+  const urlParams = new URLSearchParams(window.location.search);
+  const session = urlParams.get('session');
+  const SESSION_KEY = `session_${session}`;
 
-    if(!session){
-      alert('Geçersiz session! Giriş sayfasına yönlendiriliyorsunuz.');
-      window.location.href = 'index.html';
+  if(!session){
+    alert('Geçersiz session! Giriş sayfasına yönlendiriliyorsunuz.');
+    window.location.href = 'index.html';
+  } else {
+    const now = Date.now();
+    const existing = localStorage.getItem(SESSION_KEY);
+
+    if(!existing){
+      // Yeni session, zaman kaydet
+      localStorage.setItem(SESSION_KEY, now);
     } else {
-      const now = Date.now();
-      const existing = localStorage.getItem(SESSION_KEY);
-
-      if(!existing){
-        // Yeni session, zaman kaydet
-        localStorage.setItem(SESSION_KEY, now);
-      } else {
-        const createdTime = parseInt(existing);
-        if(now - createdTime > 5 * 60 * 1000){ // 5 dakika
-          alert('Session süresi doldu! Giriş sayfasına yönlendiriliyorsunuz.');
-          localStorage.removeItem(SESSION_KEY);
-          window.location.href = 'index.html';
-        }
+      const createdTime = parseInt(existing);
+      if(now - createdTime > 2 * 60 * 1000){ // 2 dakika
+        alert('Session süresi doldu! Giriş sayfasına yönlendiriliyorsunuz.');
+        localStorage.removeItem(SESSION_KEY);
+        window.location.href = 'index.html';
       }
     }
-  </script>
+  }
+</script>
 
-  <header>
-    <h1>Etik Komite Ana Sayfa</h1>
-    <a href="index.html">Çıkış</a>
-  </header>
+<header>
+  <h1>Etik Komite Ana Sayfa</h1>
+  <a href="index.html">Çıkış</a>
+</header>
 
-  <div class="announcements">
-    <div class="announcement">
-      <h3>[Başkan] 21/09/2025</h3>
-      <p>.</p>
-    </div>
-    <div class="announcement">
-      <h3>[Başkan] 21/09/2025</h3>
-      <p>.</p>
-    </div>
-    <div class="announcement">
-      <h3>[Başkan] 21/09/2025</h3>
-      <p>Evet selam dostlar, bu bizim yeni veritabanımız, anonsları önemli her şeyi buradan paylaşacağım.</p>
-    </div>
+<div class="announcements">
+  <div class="announcement">
+    <h3>[Başkan] 21/09/2025</h3>
+    <p>.</p>
   </div>
+  <div class="announcement">
+    <h3>[Başkan] 21/09/2025</h3>
+    <p>.</p>
+  </div>
+  <div class="announcement">
+    <h3>[Başkan] 21/09/2025</h3>
+    <p>Evet selam dostlar, bu bizim yeni veritabanımız, anonsları önemli her şeyi buradan paylaşacağım.</p>
+  </div>
+</div>
 
-  <footer>&copy; 2025 Etik Komite. Tüm hakları saklıdır.</footer>
+<footer>&copy; 2025 Etik Komite. Tüm hakları saklıdır.</footer>
 </body>
 </html>
