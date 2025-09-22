@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIAD Stil Mavi Kareler</title>
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    background-color: #0a0a0a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(12, 30px); /* 12 sütun, kare boyutu 30px */
+    grid-gap: 10px; /* kareler arası boşluk */
+  }
+
+  .square {
+    width: 30px;
+    height: 30px;
+    background-color: #3fa9f5;
+    opacity: 0;
+    animation: blink 2s infinite;
+  }
+
+  @keyframes blink {
+    0% { opacity: 0; }
+    20% { opacity: 1; }
+    80% { opacity: 1; }
+    100% { opacity: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="grid" id="grid"></div>
+
+<script>
+const grid = document.getElementById('grid');
+const rows = 8;  // satır sayısı
+const cols = 12; // sütun sayısı
+
+for(let i=0; i<rows*cols; i++){
+  const sq = document.createElement('div');
+  sq.className = 'square';
+  // rastgele animasyon gecikmesi (AIAD’de kareler aynı anda yanmıyor)
+  sq.style.animationDelay = (Math.random() * 2) + 's';
+  grid.appendChild(sq);
+}
+</script>
+</body>
+</html>
